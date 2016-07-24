@@ -22,4 +22,8 @@ class Order
   def to_s
     "#{employee.user.capitalize} must deliver #{meal.name.capitalize} to #{customer.name.capitalize} at #{customer.address}"
   end
+
+  def to_csv_row
+    [ @id, @employee.id, @customer.id, @meal.id, @delivered ]
+  end
 end

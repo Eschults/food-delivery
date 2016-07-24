@@ -9,6 +9,10 @@ class Meal
   end
 
   def to_s
-    "#{meal.name.capitalize} (#{meal.price}€)"
+    "#{name.capitalize} (#{price}€)"
+  end
+
+  def to_csv_row
+    [ @id, @name, @price ]
   end
 end

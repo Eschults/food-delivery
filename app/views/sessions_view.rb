@@ -1,3 +1,5 @@
+require_relative "base_view"
+
 class SessionsView < BaseView
   def welcome_manager(employee)
     puts "Welcome Boss #{employee.user.capitalize}!"

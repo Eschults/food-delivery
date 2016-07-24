@@ -11,4 +11,8 @@ class Customer
   def to_s
     "#{name.capitalize}: #{address}"
   end
+
+  def to_csv_row
+    [ @id, @name, @address ]
+  end
 end

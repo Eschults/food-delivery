@@ -1,7 +1,8 @@
 require "csv"
 require_relative "../models/order"
+require_relative "base_repository"
 
-class OrdersRepository
+class OrdersRepository < BaseRepository
   attr_reader :employees_repository, :customers_repository, :meals_repository
 
   def initialize(csv_file, employees_repository, customers_repository, meals_repository)
@@ -17,25 +18,6 @@ class OrdersRepository
   def mark_order_as_delivered(order)
     order.mark_as_delivered!
     save_to_csv
-  end
-
-  def add(order)
-    order.id = @next_id
-    @orders << order
-    @next_id += 1
-    save_to_csv
-  end
-
-  def find(id)
-    @orders.find { |order| id == order.id }
-  end
-
-  def find_by_index(index)
-    @orders[index]
-  end
-
-  def all
-    @orders
   end
 
   def undelivered
@@ -59,14 +41,7 @@ class OrdersRepository
     end
   end
 
-  def save_to_csv
-    binding.pry
-    CSV.open(@csv_file, "w") do |csv|
-      csv << [ "id", "employee_id", "customer_id", "meal_id", "delivered" ]
-      @orders.each do |order|
-        csv << [ order.id, order.employee.id, order.customer.id, order.meal.id, order.delivered ]
-      end
-      csv << [@next_id]
-    end
+  def headers
+    [ "id", "employee_id", "customer_id", "meal_id", "delivered" ]
   end
 end
