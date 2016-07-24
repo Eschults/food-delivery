@@ -1,0 +1,2 @@
+class CustomersView < BaseView
+end

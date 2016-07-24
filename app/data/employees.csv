@@ -1,0 +1,5 @@
+"id","user","password","manager"
+"1","john","1234","true"
+"2","jack","1234","false"
+"3","joe","1234","false"
+"4","jim","1234","false"
