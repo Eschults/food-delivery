@@ -6,13 +6,10 @@ class OrdersRepository < BaseRepository
   attr_reader :employees_repository, :customers_repository, :meals_repository
 
   def initialize(csv_file, employees_repository, customers_repository, meals_repository)
-    @csv_file = csv_file
     @employees_repository = employees_repository
     @customers_repository = customers_repository
     @meals_repository = meals_repository
-    @orders = []
-    @next_id = 1
-    load_csv
+    super(csv_file)
   end
 
   def mark_order_as_delivered(order)
@@ -21,7 +18,7 @@ class OrdersRepository < BaseRepository
   end
 
   def undelivered
-    @orders.reject { |order| order.delivered }
+    @resources.reject { |order| order.delivered }
   end
 
   private
@@ -34,7 +31,7 @@ class OrdersRepository < BaseRepository
         meal = @meals_repository.find(row[:meal_id].to_i)
         order = Order.new(id: row[:id].to_i, customer: customer, meal: meal, delivered: row[:delivered] == "true")
         employee.add_order(order) unless order.delivered?
-        @orders << order
+        @resources << order
       else
         @next_id = row[:id].to_i
       end
