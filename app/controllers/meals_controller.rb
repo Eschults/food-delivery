@@ -6,7 +6,7 @@ class MealsController < BaseController
   def create
     name = @resources_view.ask_for("name")
     price = @resources_view.ask_for("price")
-    @resources_repository.add(resource_class.new(name: name, price: price))
+    @resources_repository.add(Meal.new(name: name, price: price))
   end
 
   private

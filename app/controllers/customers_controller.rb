@@ -6,7 +6,7 @@ class CustomersController < BaseController
   def create
     name = @resources_view.ask_for("name")
     address = @resources_view.ask_for("address")
-    @resources_repository.add(resource_class.new(name: name, address: address))
+    @resources_repository.add(Customer.new(name: name, address: address))
   end
 
   private
