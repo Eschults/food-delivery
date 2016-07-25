@@ -13,7 +13,7 @@ class OrdersController
   def create
     meal = display_and_select("meal", @meals_repository)
     customer = display_and_select("customer", @customers_repository)
-    employee = display_and_select("employee", @customers_repository)
+    employee = display_and_select("employee", @employees_repository)
 
     order = Order.new(meal: meal, customer: customer)
     employee.add_order(order)
@@ -50,8 +50,8 @@ class OrdersController
     @orders_view.display(resources)
     resource_found = nil
     until resource_found
-      resource_index = @orders_view.ask_for_index_of(resource)
-      resource_found = @meals_repository.find_by_index(resrouce_index)
+      resource_index = @orders_view.ask_for_index_of(resource_name)
+      resource_found = resource_repo.find_by_index(resource_index)
     end
     return resource_found
   end
