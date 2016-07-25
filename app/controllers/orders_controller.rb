@@ -21,7 +21,6 @@ class OrdersController
   end
 
   def list_undelivered
-    binding.pry
     undelivered_orders = @orders_repository.undelivered
     @orders_view.display(undelivered_orders)
   end

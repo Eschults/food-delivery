@@ -11,6 +11,10 @@ class EmployeesRepository < BaseRepository
     @resources.reject { |employee| employee.manager? }
   end
 
+  def find_by_index(index)
+    delivery_guys[index]
+  end
+
   private
 
   def resource_class

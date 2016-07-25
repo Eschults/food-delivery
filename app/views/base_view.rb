@@ -6,7 +6,7 @@ class BaseView
   end
 
   def ask_for_index_of(topic)
-    puts "which #{topic} index?"
+    puts "Which #{topic} index?"
     print "> "
     gets.chomp.to_i - 1
   end
