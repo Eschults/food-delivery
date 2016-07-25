@@ -1,5 +1,6 @@
 require_relative "../models/customer"
 require_relative "../views/customers_view"
+require_relative "base_controller"
 
 class CustomersController < BaseController
 
