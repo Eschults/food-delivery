@@ -8,8 +8,8 @@ class Router
     @meals_controller = meals_controller
     @customers_controller = customers_controller
     @orders_controller = orders_controller
-    @current_user = nil
     @sessions_controller = sessions_controller
+    @current_user = nil
   end
 
   def run
@@ -21,28 +21,12 @@ class Router
         display_manager_tasks
         action = gets.chomp.to_i
         print `clear`
-        case action
-        when 1 then @meals_controller.create
-        when 2 then @meals_controller.index
-        when 3 then @customers_controller.create
-        when 4 then @customers_controller.index
-        when 5 then @orders_controller.list_undelivered
-        when 6 then @orders_controller.create
-        when 7 then logout!
-        when 8 then stop!
-        else puts "Please press 1, 2, 3, 4, 5, 6, 7 or 8"
-        end
+        trigger_manager_request(action)
       else
         display_delivery_guy_tasks
         action = gets.chomp.to_i
         print `clear`
-        case action
-        when 1 then @orders_controller.list_my_undelivered
-        when 2 then @orders_controller.mark_as_delivered
-        when 3 then logout!
-        when 4 then stop!
-        else puts "Please press 1, 2, 3 or 4"
-        end
+        trigger_delivery_guy_request(action)
       end
     end
   end
@@ -71,6 +55,20 @@ class Router
     print "> "
   end
 
+  def trigger_manager_request(action)
+    case action
+    when 1 then @meals_controller.create
+    when 2 then @meals_controller.index
+    when 3 then @customers_controller.create
+    when 4 then @customers_controller.index
+    when 5 then @orders_controller.list_undelivered
+    when 6 then @orders_controller.create
+    when 7 then logout!
+    when 8 then stop!
+    else puts "Please press 1, 2, 3, 4, 5, 6, 7 or 8"
+    end
+  end
+
   def display_delivery_guy_tasks
     puts ""
     puts "What do you want to do next?"
@@ -79,5 +77,15 @@ class Router
     puts "3 - Logout"
     puts "4 - Stop and exit the program"
     print "> "
+  end
+
+  def trigger_delivery_guy_request(action)
+    case action
+    when 1 then @orders_controller.list_my_undelivered
+    when 2 then @orders_controller.mark_as_delivered
+    when 3 then logout!
+    when 4 then stop!
+    else puts "Please press 1, 2, 3 or 4"
+    end
   end
 end
