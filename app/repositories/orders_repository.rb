@@ -23,8 +23,19 @@ class OrdersRepository < BaseRepository
 
   private
 
-  def resource_class
-    Order
+  def load_csv
+    CSV.foreach(@csv_file, headers: :first_row, header_converters: :symbol) do |row|
+      if row[:employee_id]
+        employee = @employees_repository.find(row[:employee_id].to_i)
+        customer = @customers_repository.find(row[:customer_id].to_i)
+        meal = @meals_repository.find(row[:meal_id].to_i)
+        order = Order.new(id: row[:id].to_i, customer: customer, meal: meal, delivered: row[:delivered] == "true")
+        employee.add_order(order) unless order.delivered?
+        @resources << order
+      else
+        @next_id = row[:id].to_i
+      end
+    end
   end
 
   def headers
