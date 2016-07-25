@@ -18,7 +18,7 @@ class OrdersRepository < BaseRepository
   end
 
   def undelivered
-    @resources.reject { |order| order.delivered }
+    @resources.reject { |order| order.delivered? }
   end
 
   private
