@@ -6,14 +6,8 @@ class MealsRepository < BaseRepository
 
   private
 
-  def load_csv
-    CSV.foreach(@csv_file, headers: :first_row, header_converters: :symbol) do |row|
-      if row[:name]
-        @resources << Meal.new(id: row[:id].to_i, name: row[:name], price: row[:price].to_i)
-      else
-        @next_id = row[:id].to_i
-      end
-    end
+  def resource_class
+    Meal
   end
 
   def headers

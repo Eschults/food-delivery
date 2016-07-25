@@ -27,6 +27,16 @@ class BaseRepository
 
   private
 
+  def load_csv
+    CSV.foreach(@csv_file, headers: :first_row, header_converters: :symbol) do |row|
+      if row[:name] || row[:user] || row[:employee_id]
+        @resources << resource_class.new(row)
+      else
+        @next_id = row[:id].to_i
+      end
+    end
+  end
+
   def save_to_csv
     CSV.open(@csv_file, "w") do |csv|
       csv << headers

@@ -11,10 +11,10 @@ require_relative "app/controllers/orders_controller"
 
 require_relative "app/router"
 
-MEALS_CSV_FILE = File.join(File.dirname(__FILE__), "app/data/meals.csv")
-CUSTOMERS_CSV_FILE = File.join(File.dirname(__FILE__), "app/data/customers.csv")
-EMPLOYEES_CSV_FILE = File.join(File.dirname(__FILE__), "app/data/employees.csv")
-ORDERS_CSV_FILE = File.join(File.dirname(__FILE__), "app/data/orders.csv")
+MEALS_CSV_FILE = File.join(File.dirname(__FILE__), "data/meals.csv")
+CUSTOMERS_CSV_FILE = File.join(File.dirname(__FILE__), "data/customers.csv")
+EMPLOYEES_CSV_FILE = File.join(File.dirname(__FILE__), "data/employees.csv")
+ORDERS_CSV_FILE = File.join(File.dirname(__FILE__), "data/orders.csv")
 
 meals_repository = MealsRepository.new(MEALS_CSV_FILE)
 customers_repository = CustomersRepository.new(CUSTOMERS_CSV_FILE)

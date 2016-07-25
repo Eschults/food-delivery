@@ -3,11 +3,11 @@ class Order
   attr_reader :employee, :customer, :meal
 
   def initialize(attributes = {})
-    @id = attributes[:id]
+    @id = attributes[:id].to_i
     @employee = attributes[:employee]
     @customer = attributes[:customer]
     @meal = attributes[:meal]
-    @delivered = attributes[:delivered] || false
+    @delivered = attributes[:delivered] == "true" || false
   end
 
   def delivered?

@@ -3,10 +3,10 @@ class Employee
   attr_reader :user, :password, :manager, :undelivered_orders
 
   def initialize(attributes = {})
-    @id = attributes[:id]
+    @id = attributes[:id].to_i
     @user = attributes[:user]
     @password = attributes[:password]
-    @manager = attributes[:manager]
+    @manager = attributes[:manager] == "true"
     @undelivered_orders = []
   end
 
